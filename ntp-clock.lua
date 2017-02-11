@@ -1,6 +1,6 @@
 
 function do_clock_sync ()
-      sntp.sync("pool.ntp.org",
+      sntp.sync(ntpserver,
       function(sec, usec, server, info)
         print('Synced to epoch', sec, 'from server', server)
         local tm = rtctime.epoch2cal(rtctime.get())

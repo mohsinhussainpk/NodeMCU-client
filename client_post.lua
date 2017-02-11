@@ -6,6 +6,7 @@ function create_json (value, unit, time, lat, lon)
     data.timestamp = time
     data.value = value
     data.unit = unit
+    data.key = mykey
     return(cjson.encode(data))
 end
 

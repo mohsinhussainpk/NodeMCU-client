@@ -1,5 +1,9 @@
 
-dofile("config.lua")
+-- local config has priority over generic
+if file.exists("config.lua.local")
+  then dofile("config.lua.local")
+  else dofile("config.lua")
+end
 
 dofile("sensors.lua")
 
@@ -9,6 +13,10 @@ dofile("ntp-clock.lua")
 dofile("wifi_connect.lua")
 
 function periodic_measurement()
+    if mykey == nil then
+      print("No credentials obtained yet.")
+      return nil
+    end
     local time = timestamp()
     local temp, hum = readDHT()
     print("Measurement done: T=" .. temp .. ", RH=" .. hum)
