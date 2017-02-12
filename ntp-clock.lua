@@ -15,8 +15,5 @@ function do_clock_sync ()
     )
 end
 
-function timestamp ()
-    local e = rtctime.get()
-    return(e)
-end
+return { sync = do_clock_sync }
 
