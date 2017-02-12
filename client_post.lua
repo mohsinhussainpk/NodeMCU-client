@@ -16,7 +16,7 @@ local function prepare_post (server, url, json_s)
             .. "Host: " .. server .. "\r\n"
             .. "Accept: */*\r\n"
             .. "User-Agent: Mozilla/4.0 (compatible; nodemcu esp8266 Lua;)\r\n"
-            .. "Connection: close\r\n"
+            .. "Connection: keep-alive\r\n"
 			.. "Content-Length: "..json_s_length.."\r\n"
             .. "Content-Type: application/json\r\n\r\n"
             .. json_s
@@ -31,17 +31,19 @@ local function parse_response(response)
      return code, text, key
 end
 
-function post_json (server, url, json_s)
+local sk = nil
+function post_json (server, send_table)
     if mykey == nil then
         print("No API key, will not send.")
         return
     end
-    local sk = tls.createConnection(net.TCP, 1)
+    if sk == nil then sk = tls.createConnection(net.TCP, 1) end
     sk:on("connection", function(conn)
         print("--connected")
-        local post_s = prepare_post(server, url, json_s)
-        print("--sending: " .. json_s)
-        json_s = nil
+        local url = send_table[1][1]
+        local json= send_table[1][2]
+        local post_s = prepare_post(server, url, json)
+        print("--sending: " .. json)
         conn:send(post_s)
     end )
     sk:on("sent", function(conn, c)
@@ -50,7 +52,16 @@ function post_json (server, url, json_s)
     sk:on("receive", function(conn, c)
       local code, text, msg = parse_response(c)
       print("--received: " .. code .. ", " .. text .. ", message: " .. msg)
-      conn:close()
+      table.remove(send_table, 1)
+      if table.getn(send_table) > 0 then
+        local url = send_table[1][1]
+        local json= send_table[1][2]
+        local post_s = prepare_post(server, url, json)
+        print("--sending: " .. json)
+        conn:send(post_s)
+      else
+        conn:close()
+      end
     end)
     sk:on("disconnection", function(conn)  print("--disconnected") end )
     sk:connect(port,server)
