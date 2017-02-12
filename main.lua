@@ -5,32 +5,40 @@ if file.exists("config.lua.local")
   else dofile("config.lua")
 end
 
-dofile("sensors.lua")
+dofile("sensors.lc")
+dofile("client_post.lc")
+dofile("client_credentials.lc")
+dofile("ntp-clock.lc")
 
-dofile("client_post.lua")
-dofile("client_credentials.lua")
-dofile("ntp-clock.lua")
+dofile("wifi_connect.lc")
 
-dofile("wifi_connect.lua")
+
+tmr.create():alarm(10000, tmr.ALARM_AUTO, function(cb_timer)
+    if mykey == nil and wifi.sta.getip() ~= nil and timestamp() > 50000 then
+          print("Acq creds.")
+          acquire_credentials()
+    elseif mykey ~= nil then
+        cb_timer:unregister()
+    end
+end)
+
 
 function periodic_measurement()
     if mykey == nil then
-      print("No credentials obtained yet.")
-      return nil
+      print("No cred.")
+      return
     end
     local time = timestamp()
     local temp, hum = readDHT()
-    print("Measurement done: T=" .. temp .. ", RH=" .. hum)
+    print("Meas: T=" .. temp .. ", RH=" .. hum)
+    collectgarbage()
     local json_t = create_json(temp, "C", time, lat, lon)
     local json_h = create_json(hum, "%", time, lat, lon)
-    local json_cred = create_json_cred()
-    -- send with 10 seconds delay
-    post_json_cred(server, url_cred, json_cred)
+    post_json(server, url_t, json_t)
+    json_t = nil
     tmr.create():alarm(15000, tmr.ALARM_SINGLE, function()
-        post_json(server, url_t, json_t)
-    end)
-    tmr.create():alarm(30000, tmr.ALARM_SINGLE, function()
         post_json(server, url_h, json_h)
+        json_h = nil
     end)
 end
 

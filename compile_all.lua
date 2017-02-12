@@ -1,0 +1,6 @@
+node.compile("sensors.lua")
+node.compile("wifi_connect.lua")
+node.compile("ntp-clock.lua")
+node.compile("client_post.lua")
+node.compile("client_credentials.lua")
+node.compile("main.lua")
