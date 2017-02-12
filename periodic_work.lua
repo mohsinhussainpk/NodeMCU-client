@@ -17,23 +17,15 @@ local function readDHT()
 end
 
 function periodic_measurement()
-    if mykey == nil then
-      print("No cred.")
-      return
-    end
     local time = rtctime.get()
     local temp, hum = readDHT()
     print("Meas: T=" .. temp .. ", RH=" .. hum)
     collectgarbage()
     local post = require("client_post")
     local json_t = post.create_json(temp, "C", time, lat, lon)
-    post.post_json(server, url_t, json_t)
-    json_t = nil
-    tmr.create():alarm(15000, tmr.ALARM_SINGLE, function()
-        local json_h = post.create_json(hum, "%", time, lat, lon)
-        post.post_json(server, url_h, json_h)
-        json_h = nil
-    end)
+    local json_h = post.create_json(hum, "%", time, lat, lon)
+    local send_table = {{url_t, json_t},{url_h, json_h}}
+    post.post_json(server, send_table)
 end
 
 return { periodic = periodic_measurement }
