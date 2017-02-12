@@ -24,6 +24,10 @@ function prepare_post (server, url, json_s)
 end
 
 function post_json (server, url, json_s)
+    if mykey == nil then 
+        print("No API key.")
+        return
+    end
     local sk = tls.createConnection(net.TCP, 1)
     sk:on("connection", function(conn)
         print("--connected")
@@ -36,7 +40,8 @@ function post_json (server, url, json_s)
         print("--sent")
     end)
     sk:on("receive", function(conn, c)
-      print(c)
+      local code, text, msg = parse_response(c)
+      print("Code: " .. code .. ", " .. text .. ", message: " .. msg)
       conn:close()
     end)
     sk:on("disconnection", function(conn)  print("--disconnected") end )
