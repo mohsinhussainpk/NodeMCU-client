@@ -39,7 +39,9 @@ This is sensor-specific. Here, a simple DHT sensor was connected:
 
 ![Sensor hookup](DHT-connection.jpg)
 
-Red and black wires of the sensor are connected to +3.3V and GND, respectively. The yellow wire (data) is connected to the pin 1 (D1, GPIO5) and pulled up to +3.3V with 1k resistor.
+Red and black wires of the sensor are connected to +3.3V and GND, respectively.
+The yellow wire (data) is connected to the pin 1 (D1, GPIO5) and pulled up to
++3.3V with 1k - 10k resistor.
 
 
 Connecting the board to computer
@@ -48,7 +50,8 @@ CH340/CH341 "USB to serial" drivers are needed.
 
 https://github.com/nodemcu/nodemcu-devkit/tree/master/Drivers
 
-In Windows, a succesful connect will create a new serial port, viewable in "Device manager" under "Ports (COM & LPT)"".
+In Windows, a succesful connect will create a new serial port, viewable in
+"Device manager" under "Ports (COM & LPT)"".
 
 Flashing the firmware
 ---------------------
@@ -93,8 +96,9 @@ Install, run, in the top of the right panel choose the appropriate
 
 Running the code
 ----------------
-The code is automatically run via `init.lua`, however, there is
-a 5 second delay. If there is a bootlop, one can delete `init.lua`
+On bootup (or reset with on-board button or RTS icon), the code is
+automatically run via `init.lua`, however, there is a 5 second delay.
+In case of a bootlop this gives enough time to delete `init.lua`
 file during this 5 second period to avoid autorun on the next boot.
 
 Deleting can be done in the right panel, right click on `init.lua`
