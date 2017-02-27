@@ -74,19 +74,22 @@ Lua code from the repository must first be [configured](Configuration.md)
 with local parameters (wifi, location, sensor connections, reading the
 sensors) and then uploaded to the device.
 
+![ESPlorer window](ESPlorer.png)
+
 For start, one can use ESPlorer at https://esp8266.ru/esplorer/.
 Install, run, in the top of the right panel choose the appropriate
-COM port, speed 115200 and Open the port.
-By switching RTS icon ON and OFF, the device resets and restarts.
-The Lua prompt appears. Message about missing `init.lua` is normal.
-
-In the left panel, choose tabs "NodeMCU & MicroPython",
-"Scripts", at the bottom right click a button "Upload",
-select all lua files and upload them at once.
-
-On the right panel, the names of uploaded files should appear
-(otherwise press Reload button). Click on `compile_all.lua` file
-to run it. It will compile the code to reduce the memory footprint.
+  1. COM port,
+  2. speed 115200 and
+  3. press Open the port.
+  4. By switching RTS icon ON and OFF, the device resets and restarts.
+  5. The Lua prompt appears. Message about missing `init.lua` is normal.
+  6. In the left panel, choose tabs "NodeMCU & MicroPython", "Scripts",
+  7. at the bottom right click a button "Upload", select all lua files
+     and upload them at once.
+  8. On the right panel, the names of uploaded files should appear
+     (otherwise press Reload button).
+  9. Click on `compile_all.lua` file to run it. It will compile the code to
+     reduce the memory footprint.
 
 Running the code
 ----------------
