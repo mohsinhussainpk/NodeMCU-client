@@ -92,8 +92,6 @@ WIFI_PASSWORD = "mywifi_password"
 
 - Download the esplorer from the following link.
 
-github.com/4refr0nt/ESPlorer
-
 http://esp8266.ru/esplorer-latest/?f=ESPlorer.zip
 
 
@@ -111,3 +109,22 @@ http://esp8266.ru/esplorer-latest/?f=ESPlorer.zip
 ![Alt text](ESPlorer (1).png?raw=true "Uploading DHT11 LUA code")
 
 
+- In the left panel, choose tabs "NodeMCU & MicroPython", "Scripts", at the bottom right click a button "Upload", select all lua files and upload them at once. On the right panel, the names of uploaded files should appear (otherwise press Reload button).
+
+![Alt text](Run2.png?raw=true "Uploading DHT11 LUA code")
+
+![Alt text](Run3.png?raw=true "Uploading DHT11 LUA code")
+
+
+- Click on compile_all.lua file to run it. It will compile the code to reduce the memory footprint.
+
+![Alt text](Run4.png?raw=true "Uploading DHT11 LUA code")
+
+![Alt text](Run5.png?raw=true "Uploading DHT11 LUA code")
+
+![Alt text](Run6.png?raw=true "Uploading DHT11 LUA code")
+
+
+- Now the DHT11 sensor data (temperature and humidity) sending to the Terasys IoT server.
+
+![Alt text](Run7.png?raw=true "Sending temperature & humidity datas to Terasys IoT server")
