@@ -14,3 +14,6 @@ lon = 0.00000
 --- WIFI CONFIGURATION ---
 WIFI_SSID = ""
 WIFI_PASSWORD = ""
+
+--- DEVICE KEY ---
+mykey = ""

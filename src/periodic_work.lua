@@ -22,8 +22,8 @@ function periodic_measurement()
     print("Meas: T=" .. temp .. ", RH=" .. hum)
     collectgarbage()
     local post = require("client_post")
-    local json_t = post.create_json(temp, "C", time, lat, lon)
-    local json_h = post.create_json(hum, "%", time, lat, lon)
+    local json_t = post.create_json(temp, "C", "temperature", time, lat, lon)
+    local json_h = post.create_json(hum, "%", "humidity", time, lat, lon)
     local send_table = {{url_t, json_t},{url_h, json_h}}
     post.post_json(server, send_table)
 end

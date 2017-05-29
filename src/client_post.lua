@@ -1,11 +1,12 @@
 
-function create_json (value, unit, time, lat, lon)
+function create_json (value, unit, type, time, lat, lon)
     local data = {}
     data.mac = wifi.sta.getmac()
     data.location = {lat=lat, lon=lon}
     data.timestamp = time
-    data.value = value
-    data.unit = unit
+    data.metrics = {
+        { value = value,  unit = unit, type = type }
+        }
     data.key = mykey
     return(cjson.encode(data))
 end
