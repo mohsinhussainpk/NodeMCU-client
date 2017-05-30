@@ -2,8 +2,8 @@
 --- SERVER AND API DEFINITIONS ---
 server = "www.terasyshub.io"
 port = 443
-url_t = "/api/v1/data/temperature"
-url_h = "/api/v1/data/humidity"
+url_t = "/api/v1/data"
+url_h = "/api/v1/data"
 url_cred = "/api/v1/keys"
 ntpserver = "pool.ntp.org"
 
