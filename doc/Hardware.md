@@ -56,7 +56,8 @@ In Windows, a succesful connect will create a new serial port, viewable in
 Flashing the firmware
 ---------------------
 Recommended flasher on Windows: https://github.com/marcelstoer/nodemcu-pyflasher
-                               : https://github.com/nodemcu/nodemcu-flasher
+                              
+                              : https://github.com/nodemcu/nodemcu-flasher
 
 Choose:
   * select serial port,
