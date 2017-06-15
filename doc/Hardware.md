@@ -57,6 +57,8 @@ Flashing the firmware
 ---------------------
 Recommended flasher on Windows: https://github.com/marcelstoer/nodemcu-pyflasher
 
+                              : https://github.com/nodemcu/nodemcu-flasher
+
 Choose:
   * select serial port,
   * set firmware file from folder `firmware`,
